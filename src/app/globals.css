@@ -1,0 +1,797 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities; 
+
+:root {
+  --primary-color: #121212; /* Example primary color */
+  --secondary-color:  #9FE2BF ; /* Example secondary color */
+  --accent-color: #00A97F; /* Deep teal */
+  --background-color: #2a2a2a; /* Example background color */
+  
+}
+
+@layer components {
+  /* main */
+  .main-container {
+    display: flex; /* Enables flexbox layout */
+    flex-direction: column; /* Stacks children vertically */
+    flex-grow: 1; /* Allows the container to grow to fill available space */
+    min-height: 100vh; /* Minimum height of the viewport's height */
+    padding-bottom: 2.5rem; /* 40px if 1rem = 16px */
+    padding-top: 5rem; /* 112px if 1rem = 16px */
+  }
+  
+  /* Assuming 'md' breakpoint is 768px */
+  @media (max-width: 768px) {
+    .main-container {
+      padding-bottom: 8rem; /* 128px if 1rem = 16px */
+    }
+  }
+
+  /* Sign In - directly mentioned in the use case */
+  .signin {
+    position: relative;
+    width: 100%; /* Adjust the width as needed */
+    height: 100vh; /* Adjust the height as needed */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    background: #e5eac1;
+  }
+}
+
+/* Globals that might affect the overall theme or are potentially in use */
+.bg-dark-1 {
+  background-color: var(--dark-1-color); /* Example variable, ensure it's defined */
+}
+
+/* Tailwind's utilities are kept as they provide a wide range of responsive helpers and utilities */
+
+
+.App {
+  display:block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100%;
+  height: 100%;
+  background-color:whitesmoke;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+body {
+  /* bg */
+  background-color: whitesmoke;
+  /* font color */
+  color: var(--primary-color);
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;}
+
+  .Sidebar {
+    position: fixed;
+    top: 80px; /* Adjusted to the height of the navbar */
+    left: 0;
+    z-index: 999; /* Ensuring it's slightly below the navbar if they overlap */
+    height: calc(100vh - 80px); /* Adjusted to ensure it fills the height below the navbar */
+    width: 265px;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--background-color);
+    overflow-y: auto; /* Keeps the sidebar scrollable independently of the page content */
+    border-right: 4px solid var(--accent-color);
+
+  }
+  
+  .SidebarList .row, .SidebarBottom .row {
+    width: 100%;
+    height: 60px;
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    padding: 0 20px; /* Adds horizontal padding for content alignment */
+  }
+  
+  .SidebarList .row:hover, .SidebarBottom .row:hover {
+    cursor: pointer;
+    background-color: var(--accent-color);
+    color: black; /* Change text color to black */
+    transition: background-color 0.5s ease;
+  }
+
+.row #icon {
+  display:flex;
+  justify-content: center;
+  flex: 20%;
+  margin-right: 20px;
+}
+
+.row #title {
+  flex: 80%;
+}
+
+.SidebarBottom {
+  margin-top: auto; /* Pushes the container to the bottom */
+  width: 100%; /* Full width of the sidebar */
+}
+
+.SidebarBottom .row {
+  width: 100%;
+  height: 60px;
+  list-style-type: none;
+  margin: 0;
+  display: flex;
+  color: white;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.SidebarBottom .row:hover {
+  cursor: pointer;
+  background-color: var(--accent-color);
+  color: black; /* Change text color to black */
+  transition: background-color 0.5s ease;
+}
+
+.ProfileHeader {
+  display: flex;
+  height: 75px;
+  align-items: center;
+  padding: 20px;
+  margin-bottom: 10px;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 1em; /* Normalizing font size */
+}
+
+@keyframes moveBackground {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(20%, 20%);
+  }
+}
+
+
+
+.ProfileImage {
+  flex-shrink: 0; /* Prevents image container from shrinking */
+  width: 50px;
+  height: 50px;
+  border-radius: 50%; /* Circular image */
+  overflow: hidden;
+  margin-right: 20px;
+  background-color: var(--primary-color); /* Background color for image container */
+  display: flex; /* Aligns the image inside the container */
+  justify-content: center;
+  align-items: center;
+  border: 2px solid white;
+}
+
+.ProfileImage img {
+  display: block; /* Ensures no additional space around image */
+  width: 100%;
+  height: auto;
+}
+
+.ProfileName {
+  color: white; /* Text color for name */
+  font-size: 1.2em; /* Adjusted font size for the name */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 90%;
+  font-weight: 400;
+  font-style: italic;
+}
+
+.Heading {
+  display: flex;
+  margin: 150px 0px 0px 0px; /* Top, Right, Bottom margins + Left margin to account for sidebar */
+  height: 20%;
+  font-weight: bold;
+  font-size: clamp(1.5rem, 5vw, 4rem); 
+  color: var(--primary-color);
+  text-overflow: ellipsis;
+  max-width: 100vw;
+  padding: 0 20px;
+  z-index: 10;
+  text-shadow: .05em .05em 0px var(--accent-color);
+}
+
+.Heading2 {
+  display: flex;
+  font-size: 1.7em;
+  color: var(--accent-color);
+  font-weight: 600;
+  box-sizing: border-box;
+  z-index: 10;
+  text-shadow: .02em .02em 0px var(--background-color);
+  margin-bottom: 20px;
+}
+
+.studioDiv{
+  background-color: white;
+  padding: 3% 5%;
+  margin: 75px 10px;
+  border: var(--accent-color);
+  border-radius: 10px;
+  border: 1px solid var(--accent-color);
+  overflow: hidden;
+}
+
+.contain2 {
+  display: flex;
+  justify-content: space-around; /* Distributes space evenly */
+  align-items: center;
+  /* border: 3px solid black; */
+  border-top: 1px solid var(--accent-color);
+  flex-wrap: wrap; /* Allows items to wrap */
+  padding: 1.5% 5%;
+  gap: 20px; /* Adds some space between the child elements */
+}
+
+.Ldiv, .Rdiv {
+  flex: 1; /* Each takes equal space */
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  min-width: 250px; /* Minimum width before they stack */
+}
+
+.pasteTextArea {
+  width: 100%; /* Makes textarea fully occupy its parent's width */
+  height: 100%; /* Adjust height as needed */
+  box-sizing: border-box; /* Includes padding and border in the element's total width and height */
+  border: 1px solid var(--accent-color);
+}
+
+.uploadPdfButton {
+  min-width: 250px; /* Ensure it has a minimum width */
+  display: inline-block; /* Respect width and padding */
+  text-align: center; /* Center the text */
+}
+
+
+.CenterContent {
+  background-color: whitesmoke;
+  padding-left: 10%;
+  padding-right: 10%;
+  margin-left: 265px; 
+}
+
+
+
+.CenterItem {
+  display: flex;
+  justify-content: center; /* Centers content horizontally */
+  align-items: center; /* Centers content vertically */
+}
+
+.AppButton {
+  background-color: var(--accent-color); /* Light green background */
+  color: black; /* White text color for contrast */
+  padding: 10px 20px; /* Vertical and horizontal padding */
+  font-size: 1.2rem; /* Text size */
+  font-weight: 600;
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Cursor indicates it's clickable */
+  transition: background-color 0.3s, transform 0.2s; /* Smooth transition for hover effect and press */
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+.AppButton:hover, .AppButton:focus {
+  background-image: linear-gradient(to bottom, var(--secondary-color), var(--accent-color));
+}
+
+.AppButton:active {
+  transform: scale(0.98); /* Slightly shrink when clicked */
+  background-color: var(--accent-color); /* Maintain green color on click */
+}
+
+.Invisible {
+  visibility: hidden;
+  opacity: 0;
+}
+
+/* Global styles */
+body {
+  background-color: whitesmoke;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+/* Navbar styles */
+.navbar {
+  position: fixed; /* Keeps the navbar at the top of the viewport */
+  top: 0; /* Aligns navbar to the top edge of the viewport */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100vw;
+  height: 80px;
+  padding: 0 20px;
+  background-color: whitesmoke;
+  z-index: 1000; /* Ensures navbar stays above other content */
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+}
+
+.nav-items a {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-size: 1rem; /* Increased font size for better readability */
+  font-weight: 500;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.nav-items a:hover {
+  color: var(--primary-color);
+}
+
+
+/* Section styles for light and dark themes */
+.sectionL, .sectionD {
+  padding: 20px 0;
+  padding-left: 5%;
+  padding-right: 5%;
+  width: 100vw;
+  text-align: center;
+  padding-bottom: 200px;
+  margin-top: 0px;
+  min-height: 100vh;
+}
+
+.sectionL {
+  background-color: white;
+  color: var(--accent-color);
+}
+
+.sectionD {
+  background-color: whitesmoke;
+  color: var(--accent-color);
+}
+
+/* Heading and paragraph styling within sections */
+.HomeHeading, .HomePara {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 70px; /* Reduced margin-top for smaller screens */
+}
+
+.HomeHeading {
+  font-weight: bold;
+  /* Adjust the min size to ensure it fits on small screens */
+  font-size: clamp(1.5rem, 5vw, 4rem); 
+  color: var(--primary-color);
+  /* Remove white-space: nowrap to allow text wrapping */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100vw;
+  padding: 0 20px;
+  box-sizing: border-box;
+  z-index: 10;
+  text-shadow: .05em .05em 0px var(--accent-color);
+}
+
+
+.HomePara {
+  display: block;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 70px; /* Maintain top margin */
+  font-size: clamp(1rem, 1.5vw, 1.5rem); 
+  color: var(--primary-color);
+  padding: 40px 10%; /* Adjust padding as needed */
+  text-align: center; /* Ensure text is centered, especially for multiline paragraphs */
+  z-index: 10;
+}
+
+/* Link styling specific to .HomePara */
+.HomePara a {
+  color: var(--accent-color); /* Use the accent color for links to make them stand out */
+  text-decoration: none; /* Optional: remove underline from links */
+}
+
+.HomePara a:hover {
+  text-decoration: underline; /* Optional: underline on hover for better interaction feedback */
+}
+
+.ContactLink {
+  color: var(--accent-color); /* Replace with your actual color value or CSS variable */
+  text-decoration: none; /* Or 'underline' if you prefer */
+}
+
+.ContactLink:hover {
+  text-decoration: underline; /* Or 'none' if you prefer */
+}
+
+ .AppButton:focus, .ctaButton:active {
+  background-color: var(--accent-color); /* Unified hover and active state color */
+  transform: scale(0.98); /* Active state transformation */
+}
+
+.cssbuttons-io-button {
+  background: var(--accent-color);
+  color: var(--background-color);
+  margin-top: 35%;
+  padding: 0.4em 1em;
+  font-size: 1.7em;
+  font-weight: 600;
+  border-radius: 0.5em;
+  border: none;
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  height: 2.8em;
+  padding-right: 3.3em;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.2s; /* Keep the transition for consistency */
+
+}
+
+.cssbuttons-io-button .icon {
+  background: var(--background-color);
+  margin-left: 1em;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 2.2em;
+  width: 2.2em;
+  border-radius: 0.5em;
+  box-shadow: 0.1em 0.1em 0.6em 0.2em color(srgb red green rgba(0, 0, 0, 0));
+  right: 0.3em;
+  transition: all 0.3s;
+}
+
+.cssbuttons-io-button:hover .icon {
+  width: calc(100% - 0.6em);
+}
+
+.cssbuttons-io-button .icon svg {
+  width: 1.1em;
+  transition: transform 0.3s;
+  color: var(--primary-color); /* Adjust if needed */
+}
+
+.cssbuttons-io-button:hover .icon svg {
+  transform: translateX(0.1em);
+}
+
+.cssbuttons-io-button:active .icon {
+  transform: scale(0.95);
+}
+
+.button-container {
+  display: flex;
+  justify-content: center; /* Centers horizontally */
+  align-items: center; /* Centers vertically */
+  height: 50%; /* Ensure the container has a defined height */
+}
+
+.buttonWave {
+  padding: 0.4em 1em;
+  background-color: transparent;
+  border-radius: .3em;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: .25s;
+  font-weight: 400;
+  font-size: 17px;
+  border: 1px solid;
+  font-family: inherit;
+  text-transform: uppercase;
+  color: var(--accent-color);
+  z-index: 1;
+ }
+ 
+ .buttonWave::before, .buttonWave::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 50px;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  border-radius: 50%;
+  z-index: -1;
+  background-color: var(--accent-color);
+  transition: 1s ease;
+ }
+ 
+ .buttonWave::before {
+  top: -1em;
+  left: -1em;
+ }
+ 
+ .buttonWave::after {
+  left: calc(100% + 1em);
+  top: calc(100% + 1em);
+ }
+ 
+ .buttonWave:hover::before, .buttonWave:hover::after {
+  height: 410px;
+  width: 410px;
+ }
+ 
+ .buttonWave:hover {
+  color: rgb(10, 25, 30);
+ }
+ 
+ .buttonWave:active {
+  filter: brightness(.8);
+ }
+ 
+.buttonLogo {
+  margin: 0;
+  height: auto;
+  background: transparent;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
+
+/* button styling */
+.buttonLogo {
+  --border-right: 6px;
+  --text-stroke-color: var(--primary-color);
+  --animation-color: var(--accent-color);
+  --fs-size: 2em;
+  letter-spacing: 3px;
+  text-decoration: none;
+  font-size: var(--fs-size);
+  font-family: "Arial";
+  position: relative;
+  text-transform: uppercase;
+  color: transparent;
+  -webkit-text-stroke: 1px var(--text-stroke-color);
+}
+/* this is the text, when you hover on button */
+.hover-text {
+  position: absolute;
+  box-sizing: border-box;
+  content: attr(data-text);
+  color: var(--animation-color);
+  width: 0%;
+  inset: 0;
+  border-right: var(--border-right) solid var(--animation-color);
+  overflow: hidden;
+  transition: 0.5s;
+  -webkit-text-stroke: 1px var(--animation-color);
+}
+/* hover */
+.buttonLogo:hover .hover-text {
+  width: 100%;
+  filter: drop-shadow(0 0 23px var(--animation-color))
+}
+/* Flex container to align and justify card items */
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; /* Or 'space-between' if you prefer */
+  gap: 10px; /* Adjust the space between cards */
+}
+.card {
+  width: 27%;
+  min-width: 275px;
+  height: 250px;
+  border-radius: 5px;
+  background: var(--background-color);
+  position: relative;
+  padding: 1.8rem;
+  border: 4px solid var(--accent-color);
+  transition: 0.5s ease-out;
+  overflow: visible;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  margin: 5px;
+}
+
+@media (max-width: 768px) {
+  .card-container {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .card {
+    width: 80%;
+  }
+}
+
+.card-details {
+  color: var(--accent-color);
+  height: 75%;
+  display: grid;
+  place-content: center;
+  gap: .7em;
+}
+
+.card-button {
+  width: 60%;
+  border: none;
+  background-color: var(--accent-color);
+  color: black;
+  font-size: 1rem;
+  padding: .4rem 1rem;
+  position: absolute;
+  left: 50%;
+  bottom: 10px; /* Adjust as necessary for visual appearance */
+  transform: translateX(-50%);
+  opacity: 0; /* Initially hidden */
+  transition: opacity 0.3s ease-out;
+  border-radius: .3em;
+  font-weight: 500;
+  z-index: 10;
+}
+
+.card:hover .card-button {
+  opacity: 1;
+}
+
+.card-button:hover {
+  background-image: linear-gradient(to bottom, var(--secondary-color), var(--accent-color));
+}
+
+.text-body {
+  color: gray;
+  font-style: italic;
+  overflow: hidden;
+  text-align: center;
+}
+
+.text-title {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.card:hover {
+  border-color: var(--secondary-color);
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+}
+
+/* Additional styles for ManualFlashcardCreator component */
+.deckNameContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.deckNameLabel {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.deckNameInput {
+  flex-grow: 1;
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid var(--accent-color);
+}
+
+.flashcardEntry {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.flashcardSide {
+  display: flex;
+  flex-direction: column;
+}
+
+.imageUploadLabel {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 5px;
+  font-size: 0.8rem;
+  color: gray;
+  cursor: pointer;
+}
+
+.pasteTextArea {
+  padding: 8px;
+  margin-top: 5px;
+  border-radius: 4px;
+  border: 1px solid var(--accent-color);
+}
+
+.flashcardSide label,
+.imageUploadLabel {
+  margin-left: 0;
+  align-self: flex-start;
+}
+
+/* Adjusting the button-container to provide more spacing above */
+.button-container {
+  margin-top: 25px;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+/* Ensure img tags within the flashcardEntry are styled properly */
+.flashcardEntry img {
+  max-width: 100px; /* Or any size that fits your layout */
+  max-height: 100px;
+  margin-top: 5px;
+  border-radius: 4px;
+}
+
+.cardv2 {
+  flex: 1;
+  min-width: 250px; /* Minimum width of each card */
+  max-width: calc(30% - 20px); /* Adjust the percentage for desired number of columns */
+  margin-bottom: 20px; /* Space between rows of cards */
+  background-color: white; /* White background for better readability */
+  color: var(--primary-color);
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px;
+  position: relative; /* Needed for absolute positioning inside the card */
+}
+
+.cardv2 .card-title {
+  color: var(--accent-color); /* Title in accent color */
+  font-size: 1.5rem; /* Adjust the size as needed */
+  margin-bottom: 0.5em; /* Space below the title */
+  text-align: center;
+}
+
+.cardv2 .card-number-of-cards {
+  position: absolute;
+  top: 10px; /* Adjust as needed */
+  right: 10px; /* Adjust as needed */
+  color: gray; /* Gray color for the card count */
+  font-size: 0.85rem; /* Smaller font size */
+}
+
+.cardv2 .card-summary {
+  color: gray; /* Gray color for summary/description */
+  margin-top: 1em; /* Space above the summary */
+  
+}
+
+.cardv2 .card-image img {
+  border-radius: 10px; /* Match to the card's border-radius */
+  margin-bottom: 1em; /* Space below the image */
+}
+
+/* Adjustments for the imageUploadLabel if necessary */
+.cardv2 .imageUploadLabel {
+  /* Your styles for the label */
+}
+
+.FCimage {
+  height: 100px;
+  width: 200px;
+  object-fit: cover; /* Cover the area of the element, maintaining the aspect ratio */
+  object-position: center; /* Center the image within the element */
+  display: block; /* Remove the display:flex; it's not needed for img tags */
+  margin: auto; /* Center the image within its container if it's not already */
+  background-color: #2a2a2a; /* Background color in case the image doesn't cover the area */
+}
